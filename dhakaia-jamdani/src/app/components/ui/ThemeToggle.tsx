@@ -13,8 +13,8 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ className = '', size = 'md' }
   const { theme, toggleTheme, isLoading } = useTheme();
 
   const sizeClasses = {
-    sm: 'w-12 h-6',
-    md: 'w-14 h-7',
+    sm: 'w-12 h-7',
+    md: 'w-[50px] h-7',
     lg: 'w-16 h-8'
   };
 
@@ -55,7 +55,7 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ className = '', size = 'md' }
           {theme === 'light' ? (
             <Sun className={`${iconSizes[size]} text-orange-500`} />
           ) : (
-            <Moon className={`${iconSizes[size]} text-indigo-600`} />
+            <Moon className={`${iconSizes[size]} text-indigo-500`} />
           )}
         </motion.div>
       </motion.div>
