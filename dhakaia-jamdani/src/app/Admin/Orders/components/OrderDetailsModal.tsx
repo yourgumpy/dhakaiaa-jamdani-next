@@ -17,6 +17,13 @@ export const OrderDetailsModal: React.FC<OrderDetailsModalProps> = ({
   isOpen, 
   onClose 
 }) => {
+  const dispatch = useDispatch();
+  const { products, status, filters } = useSelector((state: any) => state.products);
+
+  useEffect(() => {
+    dispatch(fetchProducts() as any);
+  }, [dispatch]);
+
   if (!isOpen) return null;
 
   const formatDate = (dateString: string): string => {
@@ -28,13 +35,6 @@ export const OrderDetailsModal: React.FC<OrderDetailsModalProps> = ({
       minute: '2-digit'
     });
   };
-  const dispatch = useDispatch();
-  const { products, status, filters } = useSelector((state: any) => state.products);
-
-  useEffect(() => {
-    dispatch(fetchProducts() as any);
-
-  }, [dispatch]);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">

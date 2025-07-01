@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   Search, 
@@ -29,23 +29,7 @@ const OrderManagement = () => {
     loadOrders();
   }, []);
 
-  useEffect(() => {
-    filterOrders();
-  }, [orders, searchQuery, statusFilter]);
-
-  const loadOrders = async () => {
-    try {
-      setLoading(true);
-      const data = await fetchOrders();
-      setOrders(data);
-    } catch (error) {
-      console.error("Error loading orders:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const filterOrders = () => {
+  const filterOrders = useCallback(() => {
     let filtered = [...orders];
 
     if (searchQuery) {
@@ -61,6 +45,22 @@ const OrderManagement = () => {
     }
 
     setFilteredOrders(filtered);
+  }, [orders, searchQuery, statusFilter]);
+
+  useEffect(() => {
+    filterOrders();
+  }, [filterOrders]);
+
+  const loadOrders = async () => {
+    try {
+      setLoading(true);
+      const data = await fetchOrders();
+      setOrders(data);
+    } catch (error) {
+      console.error("Error loading orders:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleStatusUpdate = async (orderId: number, newStatus: string) => {

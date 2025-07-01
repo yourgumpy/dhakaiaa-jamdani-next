@@ -47,8 +47,8 @@ const Navbar = () => {
   const navItems = [
     { href: "/", label: "Home" },
     { href: "/Shop", label: "Shop" },
-    { href: "/about", label: "About" },
-    { href: "/contact", label: "Contact" },
+    // { href: "/", label: "About" },
+    // { href: "/", label: "Contact" },
   ];
 
   return (

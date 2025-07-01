@@ -49,15 +49,16 @@ const DualRangeSliderComp = () => {
   );
 
   // Update URL with new price range
-  const updateURL = useCallback(
-    debounce((minPrice: number, maxPrice: number) => {
+  const updateURL = useCallback((minPrice: number, maxPrice: number) => {
+    const debouncedUpdate = debounce((min: number, max: number) => {
       const params = new URLSearchParams(searchParams.toString());
-      params.set('minPrice', minPrice.toString());
-      params.set('maxPrice', maxPrice.toString());
+      params.set('minPrice', min.toString());
+      params.set('maxPrice', max.toString());
       router.push('?' + params.toString(), { scroll: false });
-    }, 300),
-    [searchParams, router]
-  );
+    }, 300);
+    
+    debouncedUpdate(minPrice, maxPrice);
+  }, [searchParams, router]);
 
   // Update slider visual position
   useEffect(() => {
