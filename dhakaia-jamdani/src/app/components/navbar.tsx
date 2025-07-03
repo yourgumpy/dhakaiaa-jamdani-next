@@ -49,7 +49,7 @@ const Navbar = () => {
     { href: "/", label: "Home" },
     { href: "/Shop", label: "Shop" },
     // { href: "/", label: "About" },
-    // { href: "/", label: "Contact" },
+    { href: "/Contact", label: "Contact" },
   ];
 
   return (
