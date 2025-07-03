@@ -57,12 +57,12 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: '/favicon/dhakaiaa_jamdani_fav_4.ico', sizes: '16x16 32x32', type: 'image/x-icon' },
-      { url: '/favicon/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/favicon/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon/dhakaiaa_jamdani_fav_6.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon/dhakaiaa_jamdani_fav_4.png', sizes: '32x32', type: 'image/png' },
     ],
-    apple: [
-      { url: '/favicon/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
-    ],
+    // apple: [
+    //   { url: '/favicon/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    // ],
     other: [
       { url: '/favicon/dhakaiaa_jamdani_fav_1.png', sizes: '192x192', type: 'image/png' },
       { url: '/favicon/dhakaiaa_jamdani_fav_2.png', sizes: '512x512', type: 'image/png' },
@@ -139,18 +139,18 @@ export default function RootLayout({
         <link rel="icon" href="/favicon/dhakaiaa_jamdani_fav_4.ico" sizes="16x16 32x32" />
         
         {/* PNG favicons for better quality */}
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
-        
-        {/* Apple Touch Icon */}
-        <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon/dhakaiaa_jamdani_fav_6.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon/dhakaiaa_jamdani_fav_4.png" />
+
+        {/* Apple Touch Icon
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" /> */}
         
         {/* Android Chrome Icons */}
         <link rel="icon" type="image/png" sizes="192x192" href="/favicon/dhakaiaa_jamdani_fav_1.png" />
         <link rel="icon" type="image/png" sizes="512x512" href="/favicon/dhakaiaa_jamdani_fav_2.png" />
         
         {/* Manifest for PWA */}
-        <link rel="manifest" href="/favicon/manifest.json" />
+        <link rel="manifest" href="/manifest.json" />
 
         {/* Additional Meta Tags */}
         <meta name="msapplication-TileColor" content="#ef4444" />

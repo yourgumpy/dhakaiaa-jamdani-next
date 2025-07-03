@@ -13,8 +13,14 @@ import {
   LogOut
 } from "lucide-react";
 import { supabase } from "@/app/utils/supabase/supabaseClient";
+import React from "react";
 
-const ModernSidebar = () => {
+interface ModernSidebarProps {
+  sidebarOpen: boolean;
+  setSidebarOpen: (open: boolean) => void;
+}
+
+const ModernSidebar: React.FC<ModernSidebarProps> = ({ sidebarOpen, setSidebarOpen }) => {
   const pathname = usePathname();
 
   const menuItems = [
@@ -68,8 +74,26 @@ const ModernSidebar = () => {
   };
 
   return (
-    <div className="w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700 h-screen fixed left-0 top-0 z-40">
+    <div
+      className={`
+        w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700 h-screen fixed left-0 top-0 z-40
+        transition-transform duration-300
+        ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+        md:translate-x-0
+      `}
+    >
       <div className="flex flex-col h-full">
+        {/* Close button for mobile */}
+        <button
+          className="md:hidden absolute top-4 right-4 p-2 rounded bg-gray-100 dark:bg-gray-800"
+          onClick={() => setSidebarOpen(false)}
+          aria-label="Close sidebar"
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+
         {/* Logo */}
         <div className="p-6 border-b border-gray-200 dark:border-gray-700">
           <Link href="/Admin/Dashboard" className="flex items-center space-x-3">
