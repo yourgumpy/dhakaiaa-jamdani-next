@@ -247,7 +247,16 @@ const Footer = () => {
           className="text-center pt-8 mt-8 border-t border-gray-700"
         >
           <p className="text-gray-400">
-            © {currentYear} Dhakaiaa Jamdani. All rights reserved. |
+             {currentYear} Dhakaiaa Jamdani . All rights reserved. | Developed by{" "}
+                  <a
+                    href="https://withshawon.vercel.app"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-red-400 transition-colors text-blue-400"
+                  >
+                    Asif Bhuiyan Shawon
+                  </a>{" "}
+                  |
             <Link
               href="/privacy"
               className="hover:text-red-400 transition-colors ml-1"

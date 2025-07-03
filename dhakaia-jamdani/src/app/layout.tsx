@@ -13,10 +13,10 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL('https://dhakaiaajamdani.com'),
   title: {
-    default: "Dhakaia Jamdani - Authentic Traditional Bangladeshi Clothing | Premium Sharee, Panjabi & Three Piece",
-    template: "%s | Dhakaia Jamdani - Traditional Bangladeshi Fashion"
+    default: "Dhakaia Jamdani - Authentic Traditional Bangladeshi Clothing | Premium Sharee, Panjabi & Three Piece | ঢাকাইয়া জামদানি - বাংলাদেশের ঐতিহ্যবাহী পোশাক",
+    template: "%s | Dhakaia Jamdani - Traditional Bangladeshi Fashion | ঢাকাইয়া জামদানি"
   },
-  description: "Discover authentic Bangladeshi traditional wear at Dhakaia Jamdani. Premium quality Jamdani Sharee, elegant Panjabi, and beautiful Three Piece collections. Handcrafted with heritage, delivered worldwide. Shop now for authentic cultural fashion.",
+  description: "Discover authentic Bangladeshi traditional wear at Dhakaia Jamdani. Premium quality Jamdani Sharee, elegant Panjabi, and beautiful Three Piece collections. Handcrafted with heritage, delivered worldwide. Shop now for authentic cultural fashion. বাংলাদেশের ঐতিহ্যবাহী জামদানি শাড়ি, পাঞ্জাবি ও থ্রি-পিস সংগ্রহ।",
   keywords: [
     "Dhakaia Jamdani",
     "Bangladeshi traditional clothing",
@@ -32,7 +32,19 @@ export const metadata: Metadata = {
     "Heritage clothing",
     "Ethnic wear Bangladesh",
     "Traditional textile",
-    "Handcrafted clothing"
+    "Handcrafted clothing",
+    // Bengali keywords
+    "ঢাকাইয়া জামদানি",
+    "বাংলাদেশি ঐতিহ্যবাহী পোশাক",
+    "জামদানি শাড়ি",
+    "পাঞ্জাবি",
+    "থ্রি-পিস",
+    "বাংলাদেশি ফ্যাশন",
+    "হ্যান্ডলুম জামদানি",
+    "ঐতিহ্যবাহী পোশাক",
+    "বাংলাদেশি ড্রেস",
+    "ঢাকা ফ্যাশন",
+    "ঐতিহ্যবাহী জামদানি"
   ],
   authors: [{ name: "Dhakaia Jamdani Team" }],
   creator: "Dhakaia Jamdani",
@@ -41,6 +53,20 @@ export const metadata: Metadata = {
     email: false,
     address: false,
     telephone: false,
+  },
+  icons: {
+    icon: [
+      { url: '/favicon/dhakaiaa_jamdani_fav_4.ico', sizes: '16x16 32x32', type: 'image/x-icon' },
+      { url: '/favicon/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/favicon/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+    other: [
+      { url: '/favicon/dhakaiaa_jamdani_fav_1.png', sizes: '192x192', type: 'image/png' },
+      { url: '/favicon/dhakaiaa_jamdani_fav_2.png', sizes: '512x512', type: 'image/png' },
+    ],
   },
   openGraph: {
     type: 'website',
@@ -107,8 +133,35 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ThemeProvider>
-      <RootClientLayout>{children}</RootClientLayout>
-    </ThemeProvider>
+    <html lang="en">
+      <head>
+        {/* Primary favicon - Next.js will automatically serve this */}
+        <link rel="icon" href="/favicon/dhakaiaa_jamdani_fav_4.ico" sizes="16x16 32x32" />
+        
+        {/* PNG favicons for better quality */}
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+        
+        {/* Apple Touch Icon */}
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+        
+        {/* Android Chrome Icons */}
+        <link rel="icon" type="image/png" sizes="192x192" href="/favicon/dhakaiaa_jamdani_fav_1.png" />
+        <link rel="icon" type="image/png" sizes="512x512" href="/favicon/dhakaiaa_jamdani_fav_2.png" />
+        
+        {/* Manifest for PWA */}
+        <link rel="manifest" href="/favicon/manifest.json" />
+
+        {/* Additional Meta Tags */}
+        <meta name="msapplication-TileColor" content="#ef4444" />
+        <meta name="msapplication-config" content="/browserconfig.xml" />
+        <meta name="theme-color" content="#ef4444" />
+      </head>
+      <body className={inter.className}>
+        <ThemeProvider>
+          <RootClientLayout>{children}</RootClientLayout>
+        </ThemeProvider>
+      </body>
+    </html>
   );
 }

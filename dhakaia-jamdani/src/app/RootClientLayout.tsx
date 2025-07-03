@@ -24,23 +24,13 @@ export default function RootClientLayout({
   }, [theme]);
 
   return (
-    <html lang="en">
-      <head>
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/icon?family=Material+Icons"
-        />
-      </head>
-      <body className={inter.className}>
-        <Provider store={store}>
-          <div>
-            <Navbar/>
-            {children}
-            <FloatingCart />
-            <Footer />
-          </div>
-        </Provider>
-      </body>
-    </html>
+    <Provider store={store}>
+      <div className={inter.className}>
+        <Navbar/>
+        {children}
+        <FloatingCart />
+        <Footer />
+      </div>
+    </Provider>
   );
 }
