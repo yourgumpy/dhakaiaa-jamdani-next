@@ -104,11 +104,11 @@ const Footer = () => {
                 </div>
                 <div className="flex items-center gap-3 text-gray-300">
                   <Phone className="w-5 h-5 text-red-400" />
-                  <span>+880 1234 567890</span>
+                  <span>+88 015 111 000 07</span>
                 </div>
                 <div className="flex items-center gap-3 text-gray-300">
                   <Mail className="w-5 h-5 text-red-400" />
-                  <span>info@dhakaiaajamdani.com</span>
+                  <span>admin@dhakaiaajamdani.com</span>
                 </div>
               </div>
             </motion.div>
@@ -153,14 +153,14 @@ const Footer = () => {
                   </h4>
                   <div className="relative w-full h-48 rounded-lg overflow-hidden border border-gray-700">
                     <iframe
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d233668.38703692693!2d90.25487!3d23.7808875!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8b087026b81%3A0x8fa563bbdd5904c2!2sDhaka%2C%20Bangladesh!5e0!3m2!1sen!2sus!4v1703123456789!5m2!1sen!2sus"
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3652.9975592530823!2d90.4386794!3d23.7117812!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b9ac0ecab693%3A0xb89c3987222e9e60!2sDhakaiaa%20Jamdani!5e0!3m2!1sen!2sbd!4v1751569466477!5m2!1sen!2sbd"
                       width="100%"
                       height="100%"
                       style={{ border: 0 }}
                       allowFullScreen
                       loading="lazy"
                       referrerPolicy="no-referrer-when-downgrade"
-                      className="grayscale hover:grayscale-0 transition-all duration-300"
+                      className="transition-all duration-300"
                     />
                     <div className="absolute top-2 left-2 bg-red-500 text-white p-2 rounded-full shadow-lg">
                       <MapPin className="w-4 h-4" />

@@ -9,13 +9,13 @@ export const OrdersFilters: React.FC<OrdersFiltersProps> = ({ onFilterChange }) 
   const dateRangeOptions = ['All Time', 'Today', 'Last 7 Days', 'Last 30 Days'];
 
   return (
-    <div className="flex flex-col sm:flex-row gap-4 mb-6">
-      <div className="form-control w-full sm:w-auto">
+    <div className="flex flex-col sm:flex-row gap-4 mb-6 w-full">
+      <div className="form-control w-full sm:w-auto flex-1">
         <label className="label">
           <span className="label-text">Status</span>
         </label>
         <select 
-          className="select select-bordered w-full max-w-xs"
+          className="select select-bordered w-full bg-inherit"
           onChange={(e) => onFilterChange({ status: e.target.value === 'All' ? undefined : e.target.value })}
         >
           {statusOptions.map(status => (
@@ -24,12 +24,12 @@ export const OrdersFilters: React.FC<OrdersFiltersProps> = ({ onFilterChange }) 
         </select>
       </div>
       
-      <div className="form-control w-full sm:w-auto">
+      <div className="form-control w-full sm:w-auto flex-1">
         <label className="label">
           <span className="label-text">Date Range</span>
         </label>
         <select 
-          className="select select-bordered w-full max-w-xs"
+          className="select select-bordered w-full bg-inherit"
           onChange={(e) => onFilterChange({ dateRange: e.target.value === 'All Time' ? undefined : e.target.value })}
         >
           {dateRangeOptions.map(range => (

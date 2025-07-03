@@ -119,7 +119,7 @@ const OrderManagement = () => {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 px-4 sm:px-6 lg:px-8">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
@@ -132,22 +132,23 @@ const OrderManagement = () => {
           className="flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition-colors"
         >
           <Download className="w-4 h-4" />
-          Export Orders
+          <span className="hidden sm:inline">Export Orders</span>
+          <span className="sm:hidden">Export</span>
         </motion.button>
       </div>
 
       {/* Filters */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 sm:p-6">
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="flex-1">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
               <input
                 type="text"
-                placeholder="Search orders by ID, customer name, or email..."
+                placeholder="Search orders..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
               />
             </div>
           </div>
@@ -155,7 +156,7 @@ const OrderManagement = () => {
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
             >
               {statusOptions.map(status => (
                 <option key={status} value={status}>
@@ -167,8 +168,8 @@ const OrderManagement = () => {
         </div>
       </div>
 
-      {/* Orders Table */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      {/* Orders Table - Desktop */}
+      <div className="hidden lg:block bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead className="bg-gray-50 dark:bg-gray-700">
@@ -274,6 +275,93 @@ const OrderManagement = () => {
         </div>
       </div>
 
+      {/* Orders Cards - Mobile & Tablet */}
+      <div className="lg:hidden space-y-4">
+        <AnimatePresence>
+          {filteredOrders.map((order, index) => (
+            <motion.div
+              key={order.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ delay: index * 0.05 }}
+              className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 shadow-sm"
+            >
+              {/* Header */}
+              <div className="flex items-center justify-between mb-3">
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                    #{order.id}
+                  </h3>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    {new Date(order.created_at).toLocaleDateString()}
+                  </p>
+                </div>
+                <div className="flex items-center gap-2">
+                  {getStatusIcon(order.status)}
+                  <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(order.status)}`}>
+                    {order.status}
+                  </span>
+                </div>
+              </div>
+
+              {/* Customer Info */}
+              <div className="mb-3">
+                <p className="text-sm font-medium text-gray-900 dark:text-white">
+                  {(order.Order_info as any)?.firstName} {(order.Order_info as any)?.lastName}
+                </p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  {(order.Order_info as any)?.email}
+                </p>
+              </div>
+
+              {/* Order Details */}
+              <div className="grid grid-cols-2 gap-4 mb-4">
+                <div>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">Items</p>
+                  <p className="text-sm font-medium text-gray-900 dark:text-white">
+                    {order.products.length} items
+                  </p>
+                </div>
+                <div>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">Total</p>
+                  <p className="text-sm font-medium text-gray-900 dark:text-white">
+                    ৳{order.total.toFixed(2)}
+                  </p>
+                </div>
+              </div>
+
+              {/* Actions */}
+              <div className="flex items-center justify-between pt-3 border-t border-gray-200 dark:border-gray-700">
+                <select
+                  value={order.status}
+                  onChange={(e) => handleStatusUpdate(order.id, e.target.value)}
+                  className="text-sm border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                >
+                  {statusOptions.slice(1).map(status => (
+                    <option key={status} value={status}>
+                      {status.charAt(0).toUpperCase() + status.slice(1)}
+                    </option>
+                  ))}
+                </select>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => {
+                    setSelectedOrder(order);
+                    setShowOrderModal(true);
+                  }}
+                  className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                >
+                  <Eye className="w-4 h-4" />
+                  View Details
+                </motion.button>
+              </div>
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </div>
+
       {/* Order Details Modal */}
       <AnimatePresence>
         {showOrderModal && selectedOrder && (
@@ -291,14 +379,14 @@ const OrderManagement = () => {
               exit={{ opacity: 0, scale: 0.95 }}
               className="fixed inset-4 md:inset-8 lg:inset-16 bg-white dark:bg-gray-900 rounded-xl z-50 overflow-y-auto"
             >
-              <div className="p-6">
+              <div className="p-4 sm:p-6">
                 <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                  <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
                     Order #{selectedOrder.id}
                   </h2>
                   <button
                     onClick={() => setShowOrderModal(false)}
-                    className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                    className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 p-2"
                   >
                     <XCircle className="w-6 h-6" />
                   </button>
@@ -338,9 +426,9 @@ const OrderManagement = () => {
                   <div className="space-y-3">
                     {selectedOrder.products.map((product: any, index: number) => (
                       <div key={index} className="flex items-center gap-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                        <div className="w-16 h-16 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
-                        <div className="flex-1">
-                          <p className="font-medium text-gray-900 dark:text-white">{product.title}</p>
+                        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gray-200 dark:bg-gray-700 rounded-lg flex-shrink-0"></div>
+                        <div className="flex-1 min-w-0">
+                          <p className="font-medium text-gray-900 dark:text-white text-sm sm:text-base truncate">{product.title}</p>
                           <p className="text-sm text-gray-500 dark:text-gray-400">৳{product.price}</p>
                         </div>
                       </div>
