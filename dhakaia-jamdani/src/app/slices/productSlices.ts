@@ -20,6 +20,7 @@ export interface Product {
   availability: string;
   image_urls?: string[];
   description?: string;
+  detailed_desc?: string;
   rating?: number;
   created_at?: string;
 }
@@ -38,7 +39,8 @@ export const fetchProducts = createAsyncThunk(
       .from('products')
       .select(`
         *,
-        discounted_price:price
+        discounted_price:price,
+        detailed_desc
       `);
 
     if (filters) {

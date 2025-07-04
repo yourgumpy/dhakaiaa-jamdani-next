@@ -7,6 +7,7 @@ interface Product {
   id: number;
   title: string;
   description: string;
+  detailed_desc?: string;
   category: string;
   availability: string;
   price: number;
@@ -32,6 +33,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
   const initialFormState = React.useMemo(() => ({
       title: "",
       description: "",
+      detailed_desc: "",
       category: "",
       availability: "in-stock",
       price: 0,
@@ -51,6 +53,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
         ...initialFormState,
         title: product.title || "",
         description: product.description || "",
+        detailed_desc: product.detailed_desc || "",
         category: product.category || "",
         availability: product.availability || "in-stock",
         price: product.price || 0,
@@ -180,6 +183,19 @@ const ProductModal: React.FC<ProductModalProps> = ({
                   onChange={handleChange}
                   readOnly={!isEditing}
                   rows={3}
+                />
+              </div>
+
+              {/* Detailed Description */}
+              <div>
+                <label className="label">Detailed Description</label>
+                <textarea
+                  name="detailed_desc" // Use the correct name
+                  className="textarea textarea-bordered w-full"
+                  value={formData.detailed_desc}
+                  onChange={handleChange}
+                  readOnly={!isEditing}
+                  rows={5}
                 />
               </div>
 

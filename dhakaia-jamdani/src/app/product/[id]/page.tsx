@@ -1,3 +1,4 @@
+// src/app/product/[id]/page.tsx
 "use client";
 import { Metadata } from "next";
 import Breadcrumbs from "@/app/components/product/breadcrumbs";
@@ -7,18 +8,20 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ShoppingCart, ArrowLeft, Star, Heart, Info, Check, X } from "lucide-react";
+import { ShoppingCart, ArrowLeft, Star, Info, Check, X, Heart } from "lucide-react";
 import { addToCart, addToFavorites } from "@/app/slices/cartSlice";
 import { User } from "@supabase/supabase-js";
 import { getUserData } from "@/app/auth/getUser";
 import { motion, AnimatePresence } from "framer-motion";
 import Head from "next/head";
+import React from 'react'; // Explicitly import React
+import DetailedDescription from "@/app/components/product/detailedDescription";
 
 const Page = () => {
   const [data, setData] = useState<User | null>(null);
   const { favorites } = useSelector((state: any) => state.cart);
   const [showLoginPrompt, setShowLoginPrompt] = useState(false);
-  const [showCartPrompt, setShowCartPrompt] = useState(false);
+  const [showFavPrompt, setShowFavPrompt] = useState(false);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
 
   useEffect(() => {
@@ -58,10 +61,10 @@ const Page = () => {
   };
 
   const handleAddToCart = () => {
-    if (!data) {
-      setShowCartPrompt(true);
-      return;
-    }
+    // if (!data) {
+    //   setShowCartPrompt(true);
+    //   return;
+    // }
     
     setIsAddingToCart(true);
     dispatch(addToCart(product));
@@ -71,6 +74,16 @@ const Page = () => {
       setIsAddingToCart(false);
     }, 1000);
   };
+
+  const handleAddToFavorites = () => {
+    if (!data) {
+      setShowFavPrompt(true);
+      return;
+    }
+
+    dispatch(addToFavorites(product));
+  };
+
 
   useEffect(() => {
     dispatch(fetchProducts() as any);
@@ -455,7 +468,7 @@ const Page = () => {
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    onClick={() => dispatch(addToFavorites(product))}
+                    onClick={handleAddToFavorites}
                     className={`flex-1 flex items-center justify-center gap-3 py-4 px-6 rounded-xl font-semibold text-lg transition-all duration-300 ${
                       isFavorite
                         ? "bg-red-500 text-white shadow-lg"
@@ -480,6 +493,18 @@ const Page = () => {
                 )}
               </div>
             </motion.div>
+
+            {/* Detailed Description Section */}
+            {product.detailed_desc && (
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+              >
+                <DetailedDescription description={product.detailed_desc} />
+              </motion.div>
+            )}
+
           </div>
         </div>
         
@@ -538,9 +563,9 @@ const Page = () => {
           )}
         </AnimatePresence>
 
-        {/* Cart Prompt Modal */}
+        {/* Favorites Prompt Modal */}
         <AnimatePresence>
-          {showCartPrompt && (
+          {showFavPrompt && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -557,8 +582,8 @@ const Page = () => {
                   <div className="w-16 h-16 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
                     <ShoppingCart className="w-8 h-8 text-orange-500" />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Sign in to add to cart</h3>
-                  <p className="text-gray-600 dark:text-gray-400 mb-6">Please log in or create an account to add items to your cart and make purchases.</p>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Sign in to add your Favourite Items</h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-6">Please log in or create an account to add items to your favourites.</p>
                   <div className="flex flex-col sm:flex-row gap-3">
                     <Link href="/login" className="flex-1">
                       <motion.button
@@ -582,7 +607,7 @@ const Page = () => {
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    onClick={() => setShowCartPrompt(false)}
+                    onClick={() => setShowFavPrompt(false)}
                     className="w-full mt-3 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 py-2 transition-colors"
                   >
                     Close

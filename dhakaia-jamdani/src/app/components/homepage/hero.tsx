@@ -137,7 +137,7 @@ const Hero = () => {
               >
                 <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
                   <Image
-                    src="/images/sharee_1.jpg"
+                    src="/images/sharee_1.webp"
                     alt="Featured Sharee"
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-700"
@@ -168,7 +168,7 @@ const Hero = () => {
               >
                 <div className="relative aspect-square rounded-xl overflow-hidden shadow-lg">
                   <Image
-                    src="/images/panjabi_1.jpg"
+                    src="/images/panjabi_1.webp"
                     alt="Panjabi Collection"
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
@@ -191,7 +191,7 @@ const Hero = () => {
               >
                 <div className="relative aspect-square rounded-xl overflow-hidden shadow-lg">
                   <Image
-                    src="/images/threepcs_1.jpg"
+                    src="/images/threepcs_1.webp"
                     alt="Three Piece Collection"
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-500"

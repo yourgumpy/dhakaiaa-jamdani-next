@@ -29,6 +29,25 @@ const nextConfig = {
     // Headers for SEO and security
     async headers() {
         return [
+            // Cache static assets for 1 year
+            {
+                source: '/_next/static/(.*)',
+                headers: [
+                    {
+                        key: 'Cache-Control',
+                        value: 'public, max-age=31536000, immutable',
+                    },
+                ],
+            },
+            {
+                source: '/images/(.*)',
+                headers: [
+                    {
+                        key: 'Cache-Control',
+                        value: 'public, max-age=31536000, immutable',
+                    },
+                ],
+            },
             {
                 source: '/(.*)',
                 headers: [

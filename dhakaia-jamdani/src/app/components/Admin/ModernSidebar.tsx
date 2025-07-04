@@ -24,12 +24,12 @@ const ModernSidebar: React.FC<ModernSidebarProps> = ({ sidebarOpen, setSidebarOp
   const pathname = usePathname();
 
   const menuItems = [
-    {
-      title: "Dashboard",
-      icon: LayoutDashboard,
-      href: "/Admin/Dashboard",
-      color: "text-blue-500"
-    },
+    // {
+    //   title: "Dashboard",
+    //   icon: LayoutDashboard,
+    //   href: "/Admin/Dashboard",
+    //   color: "text-blue-500"
+    // },
     {
       title: "All Products",
       icon: Package,
@@ -48,24 +48,24 @@ const ModernSidebar: React.FC<ModernSidebarProps> = ({ sidebarOpen, setSidebarOp
       href: "/Admin/Orders",
       color: "text-orange-500"
     },
-    {
-      title: "Analytics",
-      icon: BarChart3,
-      href: "/Admin/Analytics",
-      color: "text-indigo-500"
-    },
-    {
-      title: "Customers",
-      icon: Users,
-      href: "/Admin/Customers",
-      color: "text-pink-500"
-    },
-    {
-      title: "Settings",
-      icon: Settings,
-      href: "/Admin/Settings",
-      color: "text-gray-500"
-    }
+    // {
+    //   title: "Analytics",
+    //   icon: BarChart3,
+    //   href: "/Admin/Analytics",
+    //   color: "text-indigo-500"
+    // },
+    // {
+    //   title: "Customers",
+    //   icon: Users,
+    //   href: "/Admin/Customers",
+    //   color: "text-pink-500"
+    // },
+    // {
+    //   title: "Settings",
+    //   icon: Settings,
+    //   href: "/Admin/Settings",
+    //   color: "text-gray-500"
+    // }
   ];
 
   const handleLogout = async () => {
