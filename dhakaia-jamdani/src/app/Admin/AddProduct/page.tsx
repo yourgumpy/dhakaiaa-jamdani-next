@@ -11,6 +11,7 @@ const Page = () => {
   const [selectedPhotos, setSelectedPhotos] = useState<File[]>([]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [detailedDescription, setDetailedDescription] = useState("");
   const [category, setCategory] = useState("Sharee");
   const [availability, setAvailability] = useState("in-stock");
   const [price, setPrice] = useState(0);
@@ -62,6 +63,7 @@ const Page = () => {
       const formData = new FormData();
       formData.append("title", title);
       formData.append("description", description);
+      formData.append("detailed_desc", detailedDescription);
       formData.append("category", category);
       formData.append("inStock", availability);
       formData.append("price", price.toString());
@@ -76,6 +78,7 @@ const Page = () => {
       alert("Product added successfully!");
       setTitle("");
       setDescription("");
+      setDetailedDescription("");
       setSelectedPhotos([]);
       setPrice(0);
       setDiscount(0);
@@ -119,7 +122,7 @@ const Page = () => {
                 </span>
                 Basic Information
               </h2>
-              
+
               <div className="space-y-6">
                 <div>
                   <label className={labelClasses}>Product Title</label>
@@ -140,6 +143,18 @@ const Page = () => {
                     placeholder="Describe your product in detail"
                     className={clsx(inputClasses, "resize-none")}
                     onChange={(e) => setDescription(e.target.value)}
+                  />
+                </div>
+
+                {/* New Detailed Description field */}
+                <div>
+                  <label className={labelClasses}>Detailed Description</label>
+                  <textarea
+                    rows={6}
+                    value={detailedDescription}
+                    placeholder="Provide a more detailed description for the product page (e.g., *material*, *craftsmanship*, *care instructions*)"
+                    className={clsx(inputClasses, "resize-none")}
+                    onChange={(e) => setDetailedDescription(e.target.value)}
                   />
                 </div>
 

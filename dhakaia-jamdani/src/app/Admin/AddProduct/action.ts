@@ -9,6 +9,7 @@ export const addProduct = async (productData: FormData) => {
     {
       title: productData.get("title") as string,
       description: productData.get("description") as string,
+      detailed_desc: productData.get("detailed_desc") as string,
       category: productData.get("category") as string,
       availability: productData.get("inStock") as string,
       price: parseFloat(productData.get("price") as string),
@@ -57,6 +58,7 @@ export const addProductImages = async (productData: FormData, Id: string) => {
 interface UpdateProductData {
   title: string;
   description: string;
+  detailed_desc?: string;
   category: string;
   availability: string;
   price: number;
@@ -126,6 +128,7 @@ export const updateProduct = async (
   const updateData: UpdateProductData = {
     title: productData.get("title") as string,
     description: productData.get("description") as string,
+    detailed_desc: productData.get("detailed_desc") as string,
     category: productData.get("category") as string,
     availability: productData.get("inStock") as string,
     price: parseFloat(productData.get("price") as string),
